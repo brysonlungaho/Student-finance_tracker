@@ -3,8 +3,7 @@
 A responsive, accessible web application for tracking student expenses with regex-powered search and validation.
 
 ## Live Demo
-
-[View Live Demo](https://brysonmasivo.github.io/student-finance-tracker)
+https://youtu.be/GhrmXHOyvNg
 
 ## Features
 
