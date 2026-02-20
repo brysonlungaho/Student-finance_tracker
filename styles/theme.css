@@ -1,0 +1,390 @@
+/* Red, Black, and White Theme */
+:root {
+    --primary-red: #dc2626;
+    --primary-red-dark: #b91c1c;
+    --primary-red-light: #ef4444;
+    --black: #000000;
+    --black-light: #1a1a1a;
+    --white: #ffffff;
+    --gray-light: #f3f4f6;
+    --gray-medium: #9ca3af;
+    --gray-dark: #4b5563;
+}
+
+body {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+/* Header */
+header {
+    background-color: var(--black);
+    color: var(--white);
+    border-bottom: 3px solid var(--primary-red);
+}
+
+.logo {
+    color: var(--white);
+}
+
+.mobile-menu-btn span {
+    background-color: var(--white);
+}
+
+.nav-menu a {
+    color: var(--white);
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus,
+.nav-menu a.active {
+    background-color: var(--primary-red);
+    color: var(--white);
+}
+
+/* Main sections */
+section {
+    background-color: var(--white);
+    border: 1px solid var(--gray-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3, h4 {
+    color: var(--black);
+    border-bottom: 2px solid var(--primary-red);
+    padding-bottom: var(--spacing-sm);
+}
+
+/* Stats cards */
+.stat-card {
+    background-color: var(--black);
+    color: var(--white);
+    border: 2px solid var(--primary-red);
+}
+
+.stat-card h3 {
+    color: var(--white);
+    border-bottom-color: var(--primary-red);
+}
+
+.stat-value {
+    color: var(--primary-red);
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    background-color: var(--gray-light);
+}
+
+.progress-bar {
+    background-color: var(--primary-red);
+}
+
+/* Trend Chart */
+.chart-bar {
+    background-color: var(--primary-red);
+}
+
+.chart-bar-container:hover .chart-bar {
+    background-color: var(--primary-red-dark);
+}
+
+.chart-label {
+    color: var(--gray-dark);
+}
+
+/* Forms */
+input, select, textarea {
+    border-color: var(--gray-medium);
+    background-color: var(--white);
+    color: var(--black);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline-color: var(--primary-red);
+    border-color: var(--primary-red);
+}
+
+label {
+    color: var(--black);
+}
+
+.help-text {
+    color: var(--gray-dark);
+}
+
+.error-message {
+    color: var(--primary-red);
+}
+
+/* Buttons */
+button {
+    background-color: var(--primary-red);
+    color: var(--white);
+}
+
+button:hover,
+button:focus {
+    background-color: var(--primary-red-dark);
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+button.secondary {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+button.secondary:hover,
+button.secondary:focus {
+    background-color: var(--black-light);
+}
+
+/* Search */
+.search-group input {
+    border-color: var(--gray-medium);
+}
+
+#search-btn {
+    background-color: var(--black);
+}
+
+#clear-search {
+    background-color: var(--gray-medium);
+    color: var(--black);
+}
+
+/* Sort controls */
+.sort-controls select {
+    border-color: var(--gray-medium);
+}
+
+/* Table */
+table {
+    background-color: var(--white);
+}
+
+th {
+    background-color: var(--black);
+    color: var(--white);
+    border-bottom: 2px solid var(--primary-red);
+}
+
+td {
+    border-bottom-color: var(--gray-light);
+}
+
+tr:hover td {
+    background-color: var(--gray-light);
+}
+
+.empty-state {
+    color: var(--gray-dark);
+}
+
+/* Highlight for search matches */
+mark {
+    background-color: var(--primary-red);
+    color: var(--white);
+}
+
+/* Inline edit buttons */
+.edit-btn, .delete-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+.edit-btn {
+    background-color: var(--black);
+}
+
+.delete-btn {
+    background-color: var(--primary-red);
+}
+
+/* Footer */
+footer {
+    background-color: var(--black);
+    color: var(--white);
+    border-top: 3px solid var(--primary-red);
+}
+
+/* About section */
+.about-content {
+    background-color: var(--white);
+}
+
+.regex-examples code {
+    background-color: var(--gray-light);
+    color: var(--primary-red);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-family: monospace;
+}
+
+.keyboard-shortcuts kbd {
+    background-color: var(--black);
+    color: var(--white);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--primary-red);
+}
+
+/* Links */
+a {
+    color: var(--primary-red);
+}
+
+a:hover,
+a:focus {
+    color: var(--primary-red-dark);
+}
+
+/* Settings section */
+.settings-section {
+    background-color: var(--gray-light);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+}
+
+.currency-conversion {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-md) 0;
+}
+
+/* Import/Export buttons */
+#export-json {
+    background-color: var(--black);
+}
+
+#export-csv {
+    background-color: var(--primary-red);
+}
+
+#import-file-label {
+    background-color: var(--gray-medium);
+    color: var(--black);
+}
+
+#seed-data {
+    background-color: var(--gray-dark);
+}
+
+/* Focus states for accessibility */
+:focus-visible {
+    outline: 3px solid var(--primary-red);
+    outline-offset: 2px;
+}
+
+/* ARIA live regions */
+[role="status"] {
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    background-color: var(--gray-light);
+    border-left: 4px solid var(--primary-red);
+}
+
+[role="alert"] {
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    background-color: var(--primary-red-light);
+    color: var(--white);
+    border-left: 4px solid var(--black);
+}
+
+/* Budget message styles */
+#budget-message.warning {
+    background-color: var(--primary-red);
+    color: var(--white);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+}
+
+/* Loading state */
+.loading {
+    opacity: 0.5;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--gray-light);
+    border-top-color: var(--primary-red);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Animation for new transactions */
+@keyframes highlight-new {
+    0% {
+        background-color: var(--primary-red-light);
+        transform: scale(1.02);
+    }
+    100% {
+        background-color: transparent;
+        transform: scale(1);
+    }
+}
+
+.transaction-row.new {
+    animation: highlight-new 1s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .nav-menu.active {
+        background-color: var(--black-light);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius);
+    }
+    
+    .search-group {
+        flex-direction: column;
+    }
+    
+    .search-group button {
+        width: 100%;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .button-group button,
+    .button-group label {
+        width: 100%;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-red: #ff0000;
+        --black: #000000;
+        --white: #ffffff;
+    }
+    
+    button, .stat-card, th {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Finance Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/theme.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+        <nav role="navigation" aria-label="Main navigation">
+            <div class="nav-container">
+                <h1 class="logo">💰 Student Finance Tracker</h1>
+                <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="#dashboard" class="active">Dashboard</a></li>
+                    <li><a href="#transactions">Transactions</a></li>
+                    <li><a href="#add">Add Transaction</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content" role="main">
+        <section id="dashboard" aria-labelledby="dashboard-heading">
+            <h2 id="dashboard-heading">Dashboard</h2>
+            
+            <div class="stats-grid" role="region" aria-label="Financial statistics">
+                <div class="stat-card">
+                    <h3>Total Transactions</h3>
+                    <p class="stat-value" id="total-transactions">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Spent</h3>
+                    <p class="stat-value" id="total-amount">$0.00</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Top Category</h3>
+                    <p class="stat-value" id="top-category">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Monthly Budget</h3>
+                    <p class="stat-value" id="budget-status">$0 / $0</p>
+                </div>
+            </div>
+
+            <div class="cap-tracker" role="region" aria-label="Budget cap tracker">
+                <h3>Budget Cap Tracker</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="budget-progress" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p id="budget-message" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="recent-trends">
+                <h3>Last 7 Days Trend</h3>
+                <div class="trend-chart" id="trend-chart">
+                    <!-- Chart bars will be inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="transactions" aria-labelledby="transactions-heading">
+            <h2 id="transactions-heading">Transactions</h2>
+            
+            <div class="search-section">
+                <form id="search-form" role="search">
+                    <div class="search-group">
+                        <label for="search-input">Search transactions (regex supported):</label>
+                        <input type="text" id="search-input" placeholder="e.g., coffee|tea or \b\d{2}\.\d{2}\b" aria-describedby="search-help">
+                        <button type="submit" id="search-btn" aria-label="Search">🔍 Search</button>
+                    </div>
+                    <div class="search-options">
+                        <label>
+                            <input type="checkbox" id="case-sensitive"> Case sensitive
+                        </label>
+                        <button type="button" id="clear-search">Clear</button>
+                    </div>
+                    <p id="search-help" class="help-text">Try: coffee|tea (matches coffee or tea), \b\d{2}\.\d{2}\b (matches amounts with cents)</p>
+                </form>
+                <div id="search-error" role="alert" aria-live="assertive" class="error-message"></div>
+            </div>
+
+            <div class="sort-controls" role="group" aria-label="Sort controls">
+                <label for="sort-by">Sort by:</label>
+                <select id="sort-by" aria-label="Sort transactions by">
+                    <option value="date-desc">Date (newest first)</option>
+                    <option value="date-asc">Date (oldest first)</option>
+                    <option value="amount-desc">Amount (high to low)</option>
+                    <option value="amount-asc">Amount (low to high)</option>
+                    <option value="description-asc">Description (A-Z)</option>
+                    <option value="description-desc">Description (Z-A)</option>
+                </select>
+            </div>
+
+            <div class="table-responsive">
+                <table id="transactions-table" aria-label="Transactions list">
+                    <thead>
+                        <tr>
+                            <th scope="col">Description</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions-body">
+                        <tr>
+                            <td colspan="5" class="empty-state">No transactions yet. Add one to get started!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="add" aria-labelledby="add-heading">
+            <h2 id="add-heading">Add Transaction</h2>
+            
+            <form id="transaction-form" novalidate>
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <input type="text" id="description" name="description" required aria-describedby="description-error description-help">
+                    <div id="description-error" class="error-message" role="alert"></div>
+                    <p id="description-help" class="help-text">No leading/trailing spaces allowed</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount ($) *</label>
+                    <input type="text" id="amount" name="amount" required aria-describedby="amount-error amount-help">
+                    <div id="amount-error" class="error-message" role="alert"></div>
+                    <p id="amount-help" class="help-text">Valid format: 0, 10, 10.50 (up to 2 decimals)</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category *</label>
+                    <input type="text" id="category" name="category" required aria-describedby="category-error category-help">
+                    <div id="category-error" class="error-message" role="alert"></div>
+                    <p id="category-help" class="help-text">Letters, spaces, and hyphens only (e.g., "Food", "Books", "Entertainment")</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date *</label>
+                    <input type="text" id="date" name="date" required placeholder="YYYY-MM-DD" aria-describedby="date-error date-help">
+                    <div id="date-error" class="error-message" role="alert"></div>
+                    <p id="date-help" class="help-text">Format: YYYY-MM-DD (e.g., 2025-09-29)</p>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="save-btn">Save Transaction</button>
+                    <button type="button" id="cancel-edit" class="secondary">Cancel</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="settings" aria-labelledby="settings-heading">
+            <h2 id="settings-heading">Settings</h2>
+            
+            <div class="settings-section">
+                <h3>Currency Settings</h3>
+                <div class="form-group">
+                    <label for="base-currency">Base Currency</label>
+                    <select id="base-currency">
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                        <option value="GBP">GBP (£)</option>
+                        <option value="KES">KES (KSh)</option>
+                    </select>
+                </div>
+
+                <div class="currency-conversion">
+                    <h4>Conversion Rates</h4>
+                    <div class="form-group">
+                        <label for="rate-1">1 USD = <input type="number" id="rate-1" step="0.01" min="0" value="0.85"> EUR</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="rate-2">1 USD = <input type="number" id="rate-2" step="0.01" min="0" value="0.75"> GBP</label>
+                    </div>
+                </div>
+
+                <h3>Budget Settings</h3>
+                <div class="form-group">
+                    <label for="monthly-budget">Monthly Budget ($)</label>
+                    <input type="number" id="monthly-budget" min="0" step="0.01" value="500">
+                </div>
+
+                <h3>Data Management</h3>
+                <div class="button-group">
+                    <button type="button" id="export-json">Export to JSON</button>
+                    <button type="button" id="export-csv">Export to CSV</button>
+                    <label for="import-file" class="button secondary">Import JSON</label>
+                    <input type="file" id="import-file" accept=".json" style="display: none;">
+                    <button type="button" id="seed-data" class="secondary">Load Seed Data</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" aria-labelledby="about-heading">
+            <h2 id="about-heading">About</h2>
+            <div class="about-content">
+                <p><strong>Student Finance Tracker</strong> - A responsive web application for tracking student expenses.</p>
+                
+                <h3>Features</h3>
+                <ul>
+                    <li>Track transactions with categories</li>
+                    <li>Regex-powered search with highlighting</li>
+                    <li>Budget tracking with visual indicators</li>
+                    <li>Multiple currency support</li>
+                    <li>Data import/export (JSON/CSV)</li>
+                    <li>Fully keyboard accessible</li>
+                </ul>
+
+                <h3>Regex Examples</h3>
+                <ul class="regex-examples">
+                    <li><code>coffee|tea</code> - Find coffee OR tea transactions</li>
+                    <li><code>\b\d{2}\.\d{2}\b</code> - Find amounts with cents</li>
+                    <li><code>\b(\w+)\s+\1\b</code> - Find duplicate words</li>
+                    <li><code>^@\w+</code> - Find tags starting with @</li>
+                </ul>
+
+                <h3>Keyboard Shortcuts</h3>
+                <ul class="keyboard-shortcuts">
+                    <li><kbd>Tab</kbd> - Navigate through interactive elements</li>
+                    <li><kbd>Enter</kbd> - Activate buttons/links</li>
+                    <li><kbd>Space</kbd> - Toggle checkboxes</li>
+                    <li><kbd>Esc</kbd> - Cancel editing</li>
+                </ul>
+
+                <h3>Developer</h3>
+                <p>Bryson Lung'aho Masivo</p>
+                <p>
+                    <a href="https://github.com/brysonlungaho" target="_blank" rel="noopener">GitHub</a> |
+                    <a href="mailto:b.masivo@alustudent.com">Email</a>
+                </p>
+
+                <p class="copyright">© 2026 Student Finance Tracker. All rights reserved.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <p>Student Finance Tracker - Accessible, Responsive, and Regex-Powered</p>
+    </footer>
+
+    <!-- Templates -->
+    <template id="transaction-row-template">
+        <tr class="transaction-row">
+            <td class="description-cell"></td>
+            <td class="amount-cell"></td>
+            <td class="category-cell"></td>
+            <td class="date-cell"></td>
+            <td class="actions-cell">
+                <button class="edit-btn" aria-label="Edit transaction">✏️</button>
+                <button class="delete-btn" aria-label="Delete transaction">🗑️</button>
+            </td>
+        </tr>
+    </template>
+
+    <script type="module" src="scripts/app.js"></script>
+</body>
+</html>
